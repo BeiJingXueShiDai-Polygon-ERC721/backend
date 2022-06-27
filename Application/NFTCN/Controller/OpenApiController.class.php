@@ -1,9 +1,6 @@
 <?php
 
 namespace NFTCN\Controller;
-
-use NFTCN\Util\PinataIPFS;
-
 /**
  * 公共接口部分
  */
@@ -15,20 +12,6 @@ class OpenApiController extends CommonController
     function uploadImage()
     {
 
-    }
-
-    function testAuthentication()
-    {
-        $PintaIPFS = new PinataIPFS();
-        $result = $PintaIPFS->testAuthentication();
-        $this->jsuccess($result);
-    }
-
-    function pinFileToIPFS()
-    {
-        $name = I("name", '', 'op_t');
-        $PintaIPFS = new PinataIPFS();
-        $PintaIPFS->pinFileToIPFS($_FILES, $name);
     }
 
     function mint()
