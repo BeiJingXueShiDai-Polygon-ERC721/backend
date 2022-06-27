@@ -22,11 +22,13 @@ class PinataIPFS
 
     public function pinFileToIPFS($file, $name)
     {
+        $fileFullPath = $file['file']['tmp_name'] ."/". $file['file']['name'];
         $post = [
             'pinataOptions' => '{\"cidVersion\": 1}',
             'pinataMetadata' => "{\"name\": \"{$name}\", \"keyvalues\": {\"company\": \"Pinata\"}}"
         ];
         var_dump($file);
+        var_dump($fileFullPath);
         var_dump($post);
     }
 
