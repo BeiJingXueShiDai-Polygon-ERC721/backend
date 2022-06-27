@@ -26,8 +26,9 @@ class OpenApiController extends CommonController
 
     function pinFileToIPFS()
     {
+        $name = I("name", '', 'op_t');
         $PintaIPFS = new PinataIPFS();
-        $PintaIPFS->pinFileToIPFS($_FILES, "hhh");
+        $PintaIPFS->pinFileToIPFS($_FILES, $name);
     }
 
     function mint()
