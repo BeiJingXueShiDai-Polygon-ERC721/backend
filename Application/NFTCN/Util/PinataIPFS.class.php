@@ -25,7 +25,7 @@ class PinataIPFS
         $fileFullPath = $file['file']['tmp_name'] . "/" . $file['file']['name'];
         $url = $this->baseUrl . "/pinning/pinFileToIPFS";
         $post = [
-            'file' => curl_file_create("/Users/laifu/Documents/business/048-nftunit_tshirtmint/素材/nftunit logo.png"),
+            'file' => @$fileFullPath,
             'pinataOptions' => '{"cidVersion": 1}',
             'pinataMetadata' => '{"name": "' . $name . '", "keyvalues": {"company": "Pinata"}}'
         ];
