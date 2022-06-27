@@ -1,6 +1,6 @@
 <?php
 
-namespace Admin\Controller;
+namespace NFTCN\Controller;
 
 use Think\Controller;
 
