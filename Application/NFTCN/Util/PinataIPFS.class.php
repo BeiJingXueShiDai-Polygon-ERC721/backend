@@ -27,6 +27,8 @@ class PinataIPFS
 
         $headers = array(
             "Authorization: Bearer {$this->jwt}",
+            "pinata_api_key: {$this->key}",
+            "pinata_secret_api_key: {$this->secret}"
         );
 
         curl_setopt($curl, CURLOPT_URL, $durl);
@@ -45,6 +47,8 @@ class PinataIPFS
     {
         $headers = array(
             "Authorization: Bearer {$this->jwt}",
+            "pinata_api_key: {$this->key}",
+            "pinata_secret_api_key: {$this->secret}"
         );
 
         $curl = curl_init();
