@@ -10,26 +10,26 @@ namespace NFTCN\Util;
 class PinataIPFS
 {
     public $baseUrl = "https://api.pinata.cloud";
+    public $jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwODBmYjUxMC0wODk5LTRiOTItYTA4MS03MzE4ZTk4MTE2NTkiLCJlbWFpbCI6ImJpdG1hbi5ldGhAb3V0bG9vay5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMzJhYTMxOThmZmM5ZDQ3ODlmNjciLCJzY29wZWRLZXlTZWNyZXQiOiI4MDM5YjViNWZjMzIwMmRmNWNmY2I0OGRjODM3OGIwMDJjOWQwMjlmYjM0MjM1MTRlMGI4YWE2M2Q0MTY5YWE4IiwiaWF0IjoxNjU2MzAzMzYxfQ.6SphnDE6B8nfPg_eBhPgI83hevuhvHuB9lROnab5MDI";
     public $key = "aa3198ffc9d4789f67";
     public $secret = "8039b5b5fc3202df5cfcb48dc8378b002c9d029fb3423514e0b8aa63d4169aa8";
 
     public function testAuthentication()
     {
         $url = $this->baseUrl . "/data/testAuthentication";
-        return curlGet($url);
+        return $this->curlGet($url);
     }
 
 
     function curlGet($url)
     {
-        echo $url;
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $headers = array(
             "Accept: application/json",
-            "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIwODBmYjUxMC0wODk5LTRiOTItYTA4MS03MzE4ZTk4MTE2NTkiLCJlbWFpbCI6ImJpdG1hbi5ldGhAb3V0bG9vay5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMzJhYTMxOThmZmM5ZDQ3ODlmNjciLCJzY29wZWRLZXlTZWNyZXQiOiI4MDM5YjViNWZjMzIwMmRmNWNmY2I0OGRjODM3OGIwMDJjOWQwMjlmYjM0MjM1MTRlMGI4YWE2M2Q0MTY5YWE4IiwiaWF0IjoxNjU2MzAzMzYxfQ.6SphnDE6B8nfPg_eBhPgI83hevuhvHuB9lROnab5MDI",
+            "Authorization: Bearer {$this->jwt}",
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
@@ -43,9 +43,8 @@ class PinataIPFS
     function curlPost($url, $data = '', $agent = '')
     {
         $headers = array(
+            "Accept: application/json",
             "Authorization: Bearer {$this->jwt}",
-            "pinata_api_key: {$this->key}",
-            "pinata_secret_api_key: {$this->secret}"
         );
 
         $curl = curl_init();
