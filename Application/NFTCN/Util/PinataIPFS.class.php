@@ -31,10 +31,15 @@ class PinataIPFS
         ];
         var_dump($file);
         var_dump($fileFullPath);
-        var_dump($post['file']);
+//        var_dump($post['file']);
         var_dump($post);
 
-        $result = $this->curlPost($url, $post);
+        $headers = array(
+            "Accept: multipart/form-data",
+            "Authorization: Bearer {$this->jwt}",
+        );
+
+        $result = $this->curlPost($url, $post, $headers);
         var_dump($result);
     }
 
@@ -68,13 +73,15 @@ class PinataIPFS
         return $resp;
     }
 
-    private function curlPost($url, $data = '', $agent = '')
+    private function curlPost($url, $data = '', $agent = '', $headers = array())
     {
-        $headers = array(
-            "Accept: multipart/form-data",
-            "Authorization: Bearer {$this->jwt}",
-        );
-
+        if (!$headers) {
+            $headers = array(
+//            "Accept: multipart/form-data",
+                "Accept: application/json",
+                "Authorization: Bearer {$this->jwt}",
+            );
+        }
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_POST, 1);
