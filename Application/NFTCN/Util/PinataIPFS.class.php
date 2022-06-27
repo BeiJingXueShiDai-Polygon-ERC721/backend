@@ -21,26 +21,23 @@ class PinataIPFS
     }
 
 
-    function curlGet($durl)
+    function curlGet($url)
     {
-        $curl = curl_init();
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $headers = array(
+            "Accept: application/json",
             "Authorization: Bearer {$this->jwt}",
-            "pinata_api_key: {$this->key}",
-            "pinata_secret_api_key: {$this->secret}"
         );
-
-        curl_setopt($curl, CURLOPT_URL, $durl);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_BINARYTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLINFO_HEADER_OUT, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-        $data = curl_exec($curl);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+        $resp = curl_exec($curl);
         curl_close($curl);
-        return $data;
+        return $resp;
     }
 
     function curlPost($url, $data = '', $agent = '')
