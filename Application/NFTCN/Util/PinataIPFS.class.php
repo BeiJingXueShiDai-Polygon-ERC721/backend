@@ -71,7 +71,7 @@ class PinataIPFS
     private function curlPost($url, $data = '', $agent = '')
     {
         $headers = array(
-            "Accept: application/json",
+            "Accept: multipart/form-data",
             "Authorization: Bearer {$this->jwt}",
         );
 
