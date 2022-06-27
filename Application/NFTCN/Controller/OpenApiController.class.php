@@ -24,6 +24,12 @@ class OpenApiController extends CommonController
         $this->jsuccess($result);
     }
 
+    function pinFileToIPFS()
+    {
+        $PintaIPFS = new PinataIPFS();
+        $PintaIPFS->pinFileToIPFS($_FILES, "hhh");
+    }
+
     function mint()
     {
         //create metadata

@@ -20,8 +20,28 @@ class PinataIPFS
         return $this->curlGet($url);
     }
 
+    public function pinFileToIPFS($file, $name)
+    {
+        $post = [
+            'pinataOptions' => '{\"cidVersion\": 1}',
+            'pinataMetadata' => "{\"name\": \"{$name}\", \"keyvalues\": {\"company\": \"Pinata\"}}"
+        ];
+        var_dump($file);
+        var_dump($post);
+    }
 
-    function curlGet($url)
+    /*
+
+     █╗     ██╗██████╗      ██████╗ ███████╗     ██████╗██╗   ██╗██████╗ ██╗
+    ██║     ██║██╔══██╗    ██╔═══██╗██╔════╝    ██╔════╝██║   ██║██╔══██╗██║
+    ██║     ██║██████╔╝    ██║   ██║█████╗      ██║     ██║   ██║██████╔╝██║
+    ██║     ██║██╔══██╗    ██║   ██║██╔══╝      ██║     ██║   ██║██╔══██╗██║
+    ███████╗██║██████╔╝    ╚██████╔╝██║         ╚██████╗╚██████╔╝██║  ██║███████╗
+    ╚══════╝╚═╝╚═════╝      ╚═════╝ ╚═╝          ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+
+    */
+
+    private function curlGet($url)
     {
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_URL, $url);
@@ -40,7 +60,7 @@ class PinataIPFS
         return $resp;
     }
 
-    function curlPost($url, $data = '', $agent = '')
+    private function curlPost($url, $data = '', $agent = '')
     {
         $headers = array(
             "Accept: application/json",
