@@ -26,7 +26,6 @@ class PinataIPFS
         $curl = curl_init();
 
         $headers = array(
-            "Accept: application/json",
             "Authorization: Bearer {$this->jwt}",
         );
 
@@ -45,7 +44,6 @@ class PinataIPFS
     function curlPost($url, $data = '', $agent = '')
     {
         $headers = array(
-            "Accept: application/json",
             "Authorization: Bearer {$this->jwt}",
         );
 
