@@ -26,8 +26,8 @@ class PinataIPFS
         $url = $this->baseUrl . "/pinning/pinFileToIPFS";
         $post = [
             'file' => "@" . $fileFullPath,
-            'pinataOptions' => '{\"cidVersion\": 1}',
-            'pinataMetadata' => "{\"name\": \"{$name}\", \"keyvalues\": {\"company\": \"Pinata\"}}"
+            'pinataOptions' => '{"cidVersion": 1}',
+            'pinataMetadata' => '{"name": "' . $name . '", "keyvalues": {"company": "Pinata"}}'
         ];
         var_dump($file);
         var_dump($fileFullPath);
