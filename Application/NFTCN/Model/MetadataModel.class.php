@@ -1,6 +1,6 @@
 <?php
 
-namespace GenesisShirt\Model;
+namespace NFTCN\Model;
 
 class MetadataModel
 {
