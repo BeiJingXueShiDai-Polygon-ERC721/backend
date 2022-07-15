@@ -13,6 +13,22 @@ class OpenApiController extends CommonController
 {
     private $jsonRpcUrl = "http://47.52.129.69:8088";
 
+    function healthCheck()
+    {
+        $SmartContractUtil = new SmartContractUtil($this->jsonRpcUrl);
+        $result = $SmartContractUtil->healthCheck();
+        $result = json_decode($result, true);
+        $return = [
+            'jsonrpc' => 'running',
+            'backend' => 'running'
+        ];
+        if (!$result['state']) {
+            $return['jsonrpc'] = 'closed';
+        }
+
+        $this->jsuccess($return);
+    }
+
     function mint()
     {
         $image = I("image");
