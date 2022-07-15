@@ -15,6 +15,13 @@ class SmartContractUtil
         $this->url = $url;
     }
 
+    public function healthCheck()
+    {
+        $requestUrl = $this->url . "/jsonrpc/healthCheck";
+        $result = curlGet($requestUrl);
+        return $result;
+    }
+
     public function mint()
     {
         $requestUrl = $this->url . "/jsonrpc/mint";
